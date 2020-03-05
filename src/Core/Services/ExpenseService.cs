@@ -13,6 +13,12 @@ namespace Core.Services
     {
         private readonly ApiResourceService _api;
 
+        private const string GroupedByColumnQueryFormat = "SELECT SUM(TO_NUMBER(REPLACE(valor_pago, ',', '.'), '99999999999.99')::decimal(17,2)) as value, {0} as name from \"d4d8a7f0-d4be-4397-b950-f0c991438111\" GROUP BY {0} ORDER BY {0}";
+        
+        private const string MonthColumnName = "mes_movimentacao";
+        private const string CategoryColumnName = "categoria_economica_nome";
+        private const string SourceColumnName = "fonte_recurso_nome";
+
         public ExpenseService() : this(new ApiResourceService()) { }
 
         public ExpenseService(ApiResourceService api)
@@ -25,25 +31,26 @@ namespace Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedByMonth()
+        public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedDataByColumn(string columnName)
         {
-            string sqlQuery = "SELECT SUM(TO_NUMBER(REPLACE(valor_pago, ',', '.'), '99999999999.99')::decimal(17,2)) as value, mes_movimentacao as name from \"d4d8a7f0-d4be-4397-b950-f0c991438111\" GROUP BY mes_movimentacao ORDER BY mes_movimentacao";
+            string sqlQuery = string.Format(GroupedByColumnQueryFormat, columnName);
             var response = await _api.GetAsync<ExpenseSearchResponseData>(sqlQuery);
             return response.Result.Records.Select(item => new ExpenseGroupedData(item.Name, item.Value));
+        }
+
+        public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedByMonth()
+        {
+            return await GetGroupedDataByColumn(MonthColumnName);
         }
 
         public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedByCategory()
         {
-            string sqlQuery = "SELECT SUM(TO_NUMBER(REPLACE(valor_pago, ',', '.'), '99999999999.99')::decimal(17,2)) as value, categoria_economica_nome as name from \"d4d8a7f0-d4be-4397-b950-f0c991438111\" GROUP BY categoria_economica_nome ORDER BY categoria_economica_nome";
-            var response = await _api.GetAsync<ExpenseSearchResponseData>(sqlQuery);
-            return response.Result.Records.Select(item => new ExpenseGroupedData(item.Name, item.Value));
+            return await GetGroupedDataByColumn(CategoryColumnName);
         }
 
         public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedBySource()
         {
-            string sqlQuery = "SELECT SUM(TO_NUMBER(REPLACE(valor_pago, ',', '.'), '99999999999.99')::decimal(17,2)) as value, fonte_recurso_nome as name from \"d4d8a7f0-d4be-4397-b950-f0c991438111\" GROUP BY fonte_recurso_nome ORDER BY fonte_recurso_nome";
-            var response = await _api.GetAsync<ExpenseSearchResponseData>(sqlQuery);
-            return response.Result.Records.Select(item => new ExpenseGroupedData(item.Name, item.Value));
+            return await GetGroupedDataByColumn(SourceColumnName);
         }
 
         public void Dispose()
