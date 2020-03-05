@@ -18,6 +18,12 @@ namespace Core.Entities
 
     public class ExpenseGroupedData
     {
+        public ExpenseGroupedData(string name, decimal value)
+        {
+            Name = name;
+            Value = value;
+        }
+
         public string Name { get; private set; }
         public decimal Value { get; private set; }
     }
