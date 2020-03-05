@@ -18,12 +18,12 @@ namespace Web.Controllers
 
         public async Task<IActionResult> GroupedByMonth()
         {
-            var service = new ExpenseService();
+            using var service = new ExpenseService();
             var data = await service.GetGroupedByMonth();
-            var model = data.Select(item => new MonthlyExpenseViewModel 
+            var model = data.Select(item => new MonthlyExpenseViewModel
             {
-                Month = item.Name, 
-                Value = item.Value 
+                Month = item.Name,
+                Value = item.Value
             });
 
             return View(model);
@@ -31,7 +31,7 @@ namespace Web.Controllers
 
         public async Task<IActionResult> GroupedByCategory()
         {
-            var service = new ExpenseService();
+            using var service = new ExpenseService();
             var data = await service.GetGroupedByCategory();
             var model = data.Select(item => new CategorizedExpenseViewModel
             {
@@ -44,7 +44,7 @@ namespace Web.Controllers
 
         public async Task<IActionResult> GroupedBySource()
         {
-            var service = new ExpenseService();
+            using var service = new ExpenseService();
             var data = await service.GetGroupedBySource();
             var model = data.Select(item => new SourceExpenseViewModel
             {
