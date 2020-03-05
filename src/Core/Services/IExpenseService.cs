@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
-    public interface IExpenseService
+    public interface IExpenseService : IDisposable
     {
         Task<IEnumerable<Expense>> GetAll();
         Task<IEnumerable<ExpenseGroupedData>> GetGroupedByMonth();

@@ -12,7 +12,7 @@ namespace Core.Services
         protected readonly HttpClient client = new HttpClient();
         private readonly string _endpoint;
 
-        private string _baseUri;
+        private readonly string _baseUri;
 
         public ApiResourceService()
         {

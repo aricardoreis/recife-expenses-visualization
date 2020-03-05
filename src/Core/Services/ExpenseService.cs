@@ -34,13 +34,21 @@ namespace Core.Services
 
         public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedByCategory()
         {
-            throw new NotImplementedException();
+            string sqlQuery = "SELECT SUM(TO_NUMBER(REPLACE(valor_pago, ',', '.'), '99999999999.99')::decimal(17,2)) as value, categoria_economica_nome as name from \"d4d8a7f0-d4be-4397-b950-f0c991438111\" GROUP BY categoria_economica_nome ORDER BY categoria_economica_nome";
+            var response = await _api.GetAsync<ExpenseSearchResponseData>(sqlQuery);
+            return response.Result.Records.Select(item => new ExpenseGroupedData(item.Name, item.Value));
         }
 
         public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedBySource()
         {
-            throw new NotImplementedException();
+            string sqlQuery = "SELECT SUM(TO_NUMBER(REPLACE(valor_pago, ',', '.'), '99999999999.99')::decimal(17,2)) as value, fonte_recurso_nome as name from \"d4d8a7f0-d4be-4397-b950-f0c991438111\" GROUP BY fonte_recurso_nome ORDER BY fonte_recurso_nome";
+            var response = await _api.GetAsync<ExpenseSearchResponseData>(sqlQuery);
+            return response.Result.Records.Select(item => new ExpenseGroupedData(item.Name, item.Value));
         }
 
+        public void Dispose()
+        {
+            _api.Dispose();
+        }
     }
 }
