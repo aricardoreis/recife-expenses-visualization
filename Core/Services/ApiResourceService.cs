@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -22,7 +25,22 @@ namespace Core.Services
 
         public async Task<T> GetAsync<T>(string query)
         {
-            throw new NotImplementedException();
+            string requestUri = $"{_baseUri}{query}";
+            HttpResponseMessage response = await client.GetAsync(requestUri);
+            if (response.IsSuccessStatusCode)
+            {
+                return await ProcessResponse<T>(response);
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
+
+        private async Task<T> ProcessResponse<T>(HttpResponseMessage response)
+        {
+            var data = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return await Task.FromResult(JsonConvert.DeserializeObject<T>(data)).ConfigureAwait(false);
         }
 
         public void Dispose()
