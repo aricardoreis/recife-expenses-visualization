@@ -24,6 +24,7 @@ namespace UnitTests
             Assert.IsNotNull(responseMessageAsObject);
             Assert.IsNotNull(responseMessageAsObject.Result);
             Assert.Greater(responseMessageAsObject.Result.Records.Count, 0);
+            Assert.IsNotNull(responseMessageAsObject.Result.Records.FirstOrDefault());
             Assert.AreNotEqual(responseMessageAsObject.Result.Records.FirstOrDefault().Value, 0M);
             Assert.AreNotEqual(responseMessageAsObject.Result.Records.FirstOrDefault().Name, string.Empty);
         }
