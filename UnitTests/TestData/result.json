@@ -1,0 +1,67 @@
+{
+  "help": "http://dados.recife.pe.gov.br/api/3/action/help_show?name=datastore_search_sql",
+  "success": true,
+  "result": {
+    "records": [
+      {
+        "name": "1",
+        "value": "145790966.61"
+      },
+      {
+        "name": "2",
+        "value": "362812387.31"
+      },
+      {
+        "name": "3",
+        "value": "326802698.75"
+      },
+      {
+        "name": "4",
+        "value": "339447984.02"
+      },
+      {
+        "name": "5",
+        "value": "341173593.62"
+      },
+      {
+        "name": "6",
+        "value": "335925683.63"
+      },
+      {
+        "name": "7",
+        "value": "325152910.99"
+      },
+      {
+        "name": "8",
+        "value": "353546353.35"
+      },
+      {
+        "name": "9",
+        "value": "326795320.51"
+      },
+      {
+        "name": "10",
+        "value": "315321670.55"
+      },
+      {
+        "name": "11",
+        "value": "340947727.30"
+      },
+      {
+        "name": "12",
+        "value": "675733514.44"
+      }
+    ],
+    "fields": [
+      {
+        "type": "numeric",
+        "id": "value"
+      },
+      {
+        "type": "numeric",
+        "id": "name"
+      }
+    ],
+    "sql": "SELECT  SUM( TO_NUMBER(REPLACE(valor_pago, ',', '.'), '99999999999.99')::decimal(17,2)) as value, mes_movimentacao as name from \"d4d8a7f0-d4be-4397-b950-f0c991438111\" GROUP BY mes_movimentacao ORDER BY mes_movimentacao"
+  }
+}

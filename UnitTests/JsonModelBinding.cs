@@ -1,4 +1,8 @@
+using Core.Response;
+using Newtonsoft.Json;
 using NUnit.Framework;
+using System.IO;
+using System.Linq;
 
 namespace UnitTests
 {
@@ -10,9 +14,18 @@ namespace UnitTests
         }
 
         [Test]
-        public void Test1()
+        public void CheckResponseMessageDeserialization()
         {
-            Assert.Pass();
+            string responseMessageAsText = File.ReadAllText(TestContext.CurrentContext.TestDirectory + "\\TestData\\result.json");
+            Assert.IsNotEmpty(responseMessageAsText);
+
+            var responseMessageAsObject = JsonConvert.DeserializeObject<ExpenseSearchResponseData>(responseMessageAsText);
+            
+            Assert.IsNotNull(responseMessageAsObject);
+            Assert.IsNotNull(responseMessageAsObject.Result);
+            Assert.Greater(responseMessageAsObject.Result.Records.Count, 0);
+            Assert.AreNotEqual(responseMessageAsObject.Result.Records.FirstOrDefault().Value, 0M);
+            Assert.AreNotEqual(responseMessageAsObject.Result.Records.FirstOrDefault().Name, string.Empty);
         }
     }
 }
