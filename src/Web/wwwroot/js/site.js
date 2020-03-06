@@ -13,6 +13,7 @@ function loadTableData(url, container) {
     addLoading(container);
     $.get(url, function (data) {
         container.html(data);
+        container.find('table').DataTable();
     });
 }
 
