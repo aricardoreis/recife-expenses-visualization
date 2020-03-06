@@ -35,6 +35,11 @@ namespace IntegrationTests
 
             // TODO: Add additional checks
             Assert.IsNotNull(result);
+            result.ToList().ForEach((item) =>
+            {
+                Assert.That(!string.IsNullOrEmpty(item.Name));
+                Assert.That(item.Value > 0M);
+            });
         }
 
         [Test]
@@ -45,6 +50,10 @@ namespace IntegrationTests
 
             // TODO: Add additional checks
             Assert.IsNotNull(result);
+            result.ToList().ForEach((item) =>
+            {
+                Assert.That(!string.IsNullOrEmpty(item.Name));
+            });
         }
 
         [Test]
@@ -55,6 +64,12 @@ namespace IntegrationTests
 
             // TODO: Add additional checks
             Assert.IsNotNull(result);
+            result.ToList().ForEach((item) =>
+            {
+                Assert.That(item.Month > 0);
+                Assert.That(!string.IsNullOrEmpty(item.CategoryName));
+                Assert.That(!string.IsNullOrEmpty(item.SourceName));
+            });
         }
     }
 }
