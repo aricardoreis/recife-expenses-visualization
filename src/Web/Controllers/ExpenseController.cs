@@ -31,27 +31,27 @@ namespace Web.Controllers
             var data = await service.GetGroupedByMonth();
             var model = _mapper.Map<IEnumerable<MonthlyExpenseViewModel>>(data);
 
-            return View(model);
+            return PartialView(model);
         }
 
         public async Task<IActionResult> GroupedByCategory()
         {
             using var service = new ExpenseService();
 
-            var data = await service.GetGroupedByMonth();
+            var data = await service.GetGroupedByCategory();
             var model = _mapper.Map<IEnumerable<CategorizedExpenseViewModel>>(data);
 
-            return View(model);
+            return PartialView(model);
         }
 
         public async Task<IActionResult> GroupedBySource()
         {
             using var service = new ExpenseService();
 
-            var data = await service.GetGroupedByMonth();
+            var data = await service.GetGroupedBySource();
             var model = _mapper.Map<IEnumerable<SourceExpenseViewModel>>(data);
 
-            return View(model);
+            return PartialView(model);
         }
     }
 }

@@ -23,16 +23,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a href="#" class="nav-link text-dark load-button" data-action="@Url.Action("GroupedByMonth", "Expense")">By Month</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Expense" asp-action="GroupedByMonth">By Month</a>
+                            <a href="#" class="nav-link text-dark load-button" data-action="@Url.Action("GroupedByCategory", "Expense")">By Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Expense" asp-action="GroupedByCategory">By Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Expense" asp-action="GroupedBySource">By Source</a>
+                            <a href="#" class="nav-link text-dark load-button" data-action="@Url.Action("GroupedBySource", "Expense")">By Source</a>
                         </li>
                     </ul>
                 </div>
@@ -40,7 +37,7 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" id="main-container">
             @RenderBody()
         </main>
     </div>

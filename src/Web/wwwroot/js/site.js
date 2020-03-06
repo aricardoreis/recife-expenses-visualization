@@ -1,4 +1,23 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(function () {
+    $('.load-button').on('click', (e) => {
+        e.preventDefault();
 
-// Write your JavaScript code.
+        let element = $(e.currentTarget);
+        let action = element.data('action');
+
+        loadTableData(action, $("#main-container"));
+    });
+})
+
+function loadTableData(url, container) {
+    addLoading(container);
+    $.get(url, function (data) {
+        container.html(data);
+    });
+}
+
+function addLoading(container) {
+    let spinner = $('<div>').addClass('text-center');
+    $('<div>').addClass('spinner-border').appendTo(spinner);
+    container.html(spinner);
+}
