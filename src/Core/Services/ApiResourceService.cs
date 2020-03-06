@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
+    /// <summary>
+    /// This class represents the service that makes the connection with the API.
+    /// </summary>
     public class ApiResourceService : IDisposable
     {
         protected readonly HttpClient client = new HttpClient();
@@ -23,6 +26,12 @@ namespace Core.Services
             client.BaseAddress = new Uri(_baseUri);
         }
 
+        /// <summary>
+        /// Makes a GET request for the API, processes the response (converting the data), and returns the data.
+        /// </summary>
+        /// <typeparam name="T">The target type.</typeparam>
+        /// <param name="query">The SQL query.</param>
+        /// <returns>The data that comes from the request.</returns>
         public async Task<T> GetAsync<T>(string query)
         {
             string requestUri = $"{_baseUri}{query}";
@@ -37,6 +46,7 @@ namespace Core.Services
             }
         }
 
+        // Processes the response data serializing the JSON data to the target type.
         private async Task<T> ProcessResponse<T>(HttpResponseMessage response)
         {
             var data = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

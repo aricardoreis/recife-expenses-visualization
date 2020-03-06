@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Core.Entities
 {
+    /// <summary>
+    /// This class represents a single expense.
+    /// </summary>
     public class Expense
     {
         public Expense(int month, string categoryName, string sourceName, decimal value)
@@ -20,6 +23,9 @@ namespace Core.Entities
         public decimal Value { get; private set; }
     }
 
+    /// <summary>
+    /// This class is used to hold the grouped data about expenses
+    /// </summary>
     public class ExpenseGroupedData
     {
         public ExpenseGroupedData(string name, decimal value)

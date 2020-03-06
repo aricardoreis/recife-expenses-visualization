@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
+    /// <summary>
+    /// This is the ExpenseService and contains methods for make requests for the API.
+    /// </summary>
     public class ExpenseService : IExpenseService
     {
         private readonly ApiResourceService _api;
@@ -27,6 +30,7 @@ namespace Core.Services
             _api = api;
         }
 
+        // Gets all the expenses grouped by month, category and source.
         public async Task<IEnumerable<Expense>> GetAll()
         {
             string sqlQuery = GroupedByAllQueryFormat;
@@ -34,23 +38,27 @@ namespace Core.Services
             return response.Result.Records.Select(item => new Expense(item.Month, item.CategoryName, item.SourceName, item.Value));
         }
 
-        public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedDataByColumn(string columnName)
+        // Gets the expense data grouped by some column.
+        private async Task<IEnumerable<ExpenseGroupedData>> GetGroupedDataByColumn(string columnName)
         {
             string sqlQuery = string.Format(GroupedByColumnQueryFormat, columnName);
             var response = await _api.GetAsync<ExpenseSearchResponseData>(sqlQuery);
             return response.Result.Records.Select(item => new ExpenseGroupedData(item.Name, item.Value));
         }
 
+        // Gets the expense data grouped by month.
         public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedByMonth()
         {
             return await GetGroupedDataByColumn(MonthColumnName);
         }
 
+        // Gets the expense data grouped by category.
         public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedByCategory()
         {
             return await GetGroupedDataByColumn(CategoryColumnName);
         }
 
+        // Gets the expense data grouped by source.
         public async Task<IEnumerable<ExpenseGroupedData>> GetGroupedBySource()
         {
             return await GetGroupedDataByColumn(SourceColumnName);

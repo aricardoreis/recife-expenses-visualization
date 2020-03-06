@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
+    /// <summary>
+    /// This is the IExpenseService interface.
+    /// It contains method signatures for the requests to the API.
+    /// </summary>
     public interface IExpenseService : IDisposable
     {
         Task<IEnumerable<Expense>> GetAll();

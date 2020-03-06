@@ -8,6 +8,9 @@ using Web.Models;
 
 namespace Web
 {
+    /// <summary>
+    /// This class contains mapping configurations (AutoMapper).
+    /// </summary>
     public class ExpenseProfile : Profile
     {
         public ExpenseProfile()
