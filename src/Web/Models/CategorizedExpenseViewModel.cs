@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Web.Models
 {
-    public class CategorizedExpenseViewModel
+    public class CategorizedExpenseViewModel : BaseExpenseViewModel
     {
         [DisplayName("Category Name")]
         public string CategoryName { get; set; }
-
-        [DisplayName("Total")]
-        public decimal Value { get; set; }
     }
 }

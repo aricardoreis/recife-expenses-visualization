@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Web.Models
 {
-    public class MonthlyExpenseViewModel
+    public class MonthlyExpenseViewModel : BaseExpenseViewModel
     {
         public string Month { get; set; }
-
-        [DisplayName("Total")]
-        public decimal Value { get; set; }
 
         [DisplayName("Month")]
         public string MonthName

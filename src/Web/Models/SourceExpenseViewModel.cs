@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Web.Models
 {
-    public class SourceExpenseViewModel
+    public class SourceExpenseViewModel : BaseExpenseViewModel
     {
         [DisplayName("Source Name")]
         public string SourceName { get; set; }
-
-        [DisplayName("Total")]
-        public decimal Value { get; set; }
     }
 }
