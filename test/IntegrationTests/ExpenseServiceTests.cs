@@ -46,5 +46,15 @@ namespace IntegrationTests
             // TODO: Add additional checks
             Assert.IsNotNull(result);
         }
+
+        [Test]
+        public async Task GetAll()
+        {
+            using var service = new ExpenseService();
+            var result = await service.GetAll();
+
+            // TODO: Add additional checks
+            Assert.IsNotNull(result);
+        }
     }
 }

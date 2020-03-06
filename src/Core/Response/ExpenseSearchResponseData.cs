@@ -21,7 +21,16 @@ namespace Core.Response
     {
         [JsonProperty("name")]
         public string Name { get; set; }
-        
+
+        [JsonProperty("mes_movimentacao")]
+        public int Month { get; set; }
+
+        [JsonProperty("categoria_economica_nome")]
+        public string CategoryName { get; set; }
+
+        [JsonProperty("fonte_recurso_nome")]
+        public string SourceName { get; set; }
+
         [JsonProperty("value")]
         public decimal Value { get; set; }
     }
