@@ -6,6 +6,19 @@ namespace Core.Entities
 {
     public class Expense
     {
+        public Expense(int id, int month, int year, int categoryId, string categoryName, 
+            int sourceId, string sourceName, decimal value)
+        {
+            Id = id;
+            Month = month;
+            Year = year;
+            CategoryId = categoryId;
+            CategoryName = categoryName;
+            SourceId = sourceId;
+            SourceName = sourceName;
+            Value = value;
+        }
+
         public int Id { get; private set; }
         public int Month { get; private set; }
         public int Year { get; private set; }

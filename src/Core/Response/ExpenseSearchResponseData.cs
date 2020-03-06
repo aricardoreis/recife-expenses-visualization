@@ -19,10 +19,31 @@ namespace Core.Response
 
     public class ExpenseResultRecord
     {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-        
-        [JsonProperty("value")]
+        [JsonProperty("_id")]
+        public int Id { get; set; }
+
+        [JsonProperty("ano_movimentacao")]
+        public int Year { get; set; }
+
+        [JsonProperty("mes_movimentacao")]
+        public int Month { get; set; }
+
+        [JsonProperty("categoria_economica_codigo")]
+        public int CategoryId { get; set; }
+
+        [JsonProperty("categoria_economica_nome")]
+        public string CategoryName { get; set; }
+
+        [JsonProperty("fonte_recurso_codigo")]
+        public int SourceId { get; set; }
+
+        [JsonProperty("fonte_recurso_nome")]
+        public string SourceName { get; set; }
+
+        [JsonProperty("valor_pago")]
         public decimal Value { get; set; }
+
+        //[JsonProperty("name")]
+        //public string Name { get; set; }
     }
 }
