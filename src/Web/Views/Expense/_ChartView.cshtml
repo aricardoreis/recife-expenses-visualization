@@ -1,0 +1,8 @@
+﻿@model ChartDataViewModel
+
+@Html.Hidden("expenseData", Newtonsoft.Json.JsonConvert.SerializeObject(Model.Expenses))
+@Html.Hidden("chartType", (int)Model.Type)
+@Html.Hidden("columnName", Model.ColumnName)
+
+<button id="graph-button" style="margin: 20px 0px;">Load graph</button>
+<div id="chart"></div>
