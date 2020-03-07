@@ -9,7 +9,11 @@ The web app displays the Recife's expense data as table and chart:
 - Total expenses grouped by category.
 - Total expenses grouped by source.
 
-# Instructions
+## Instructions
+
+Download and install .NET Core Runtime if necessary:
+
+- .NET Core 3.1 download : https://dotnet.microsoft.com/download/dotnet-core/current/runtime.
 
 Using Microsoft Visual Studio:
 
@@ -26,7 +30,7 @@ Using Visual Studio Code:
 - Select the `Web` project when prompted to select the project to launch.
 - To run the application, navigate to `Debug` -> `Start Without Debugging` or type `CTRL + F5`.
 
-# Important files
+## Important files
 
 - `Core.Entities.Expense` represents a single expense.
 - `Core.Response.ExpenseSearchResponseData` represents the data that comes from the API, used for serialization purposes.
